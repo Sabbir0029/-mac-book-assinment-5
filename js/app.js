@@ -8,7 +8,7 @@ function memory(condition){
   else{
     memoryCost.innerText = parseInt(value).innerText ='180';
   }
-  getmaney();
+  finalTotalPrice();
 }
 // memory cost click Evend
 document.getElementById('frist-memory').addEventListener('click',function(){
@@ -32,7 +32,7 @@ function storage(num){
   else{
     storage.innerText = parseInt(storageValue).innerText ='180';
   }
-  getmaney();
+  finalTotalPrice();
 }
 document.getElementById('frist-storage').addEventListener('click', function(){
   storage(true);
@@ -55,7 +55,7 @@ function delivery(cost){
   else{
     mac.innerText = parseInt(input).innerText ='20';
   }
-  getmaney();
+  finalTotalPrice();
 }
 document.getElementById('first-delivery').addEventListener('click', function(){
   delivery(true);
@@ -64,21 +64,48 @@ document.getElementById('second-delivery').addEventListener('click', function(){
   delivery(false);
 });
 // total maney function
-function total(one){
-  const total = document.getElementById(one +'-cost');
-  const value = parseInt(total.innerText);
-  return value;
+function finalTotalPrice() {
+  let besttotal = document.getElementById("Price").innerText;
+  let memoryPrice = document.getElementById("memory-cost").innerText;
+  let storagePrice = document.getElementById("storage-cost").innerText;
+  let deliveryPrice = document.getElementById("delivery-cost").innerText;
+  let convtTotalPrice = (parseInt(besttotal) + parseInt(memoryPrice) + parseInt(storagePrice) + parseInt(deliveryPrice));
+  let Price = document.getElementById("total-cost");
+  Price.innerText = convtTotalPrice;
+  let TotalPrice = document.getElementById("total-money");
+  TotalPrice.innerText = Price.innerText;
 }
-function getmaney(){
-  let totalCost = total('total') + 1299;
-  let memoryCost = total('memory') * 1;
-  let storageCost = total('storage') * 1;
-  let deliveryCost = total('delivery') * 1;
-  let totalone = memoryCost + storageCost + deliveryCost;
-  let totalManey = totalCost + totalone;
 
-  document.getElementById('memory-cost').innerText = memoryCost;
-  document.getElementById('storage-cost').innerText = storageCost;
-  document.getElementById('delivery-cost').innerText = deliveryCost;
-  document.getElementById('total-cost').innerText = totalManey;
-}
+// Promo Code Apply Button
+let promoCodeApplyBtn = document.getElementById("pomoCodeBtn");
+promoCodeApplyBtn.addEventListener("click", function () {
+    // Let's Take The Peomo Code 
+    let promoCode = "stevekaku"
+    let pomoCode = document.getElementById("pomoCode");
+    let promoCodeInputValue = pomoCode.value.toLowerCase();
+    if (promoCodeInputValue == promoCode) {
+        // Let's Get The Discount Percentage
+        let discountPrcntge = 20;
+        let subtotalPrice = document.getElementById("total-cost");
+        subtotalPrice = subtotalPrice.innerText;
+        let discountAmount = (subtotalPrice / 100) * 20;
+        subtotalPrice = subtotalPrice - discountAmount;
+        let grandTotalPrice = document.getElementById("total-money");
+        grandTotalPrice.innerText = subtotalPrice; 
+        pomoCode.value = " ";
+        // Let's Show The Success Messge
+        let secret = document.getElementById("secretCode");
+        secret.innerText = "You Get $" + discountAmount.toFixed(2) + " Discount!";
+    } else if (promoCodeInputValue == "") {
+        let secret = document.getElementById("secretCode");
+        secret.innerText = " ";
+    } else if (promoCodeInputValue != promoCode) {
+        pomoCode.value = " ";
+        let secret = document.getElementById("secretCode");
+        secret.innerText = " ";
+    } else {
+        pomoCode.value = " ";
+        let secret = document.getElementById("secretCode");
+        secret.innerText = " ";
+    }
+});
