@@ -55,3 +55,13 @@ document.getElementById('first-delivery').addEventListener('click', function(){
 document.getElementById('second-delivery').addEventListener('click', function(){
   delivery(false);
 });
+// total
+// function total(){
+//   const price = document.getElementById('total-cost');
+//   const pricevalue = price.innerText;
+//   return pricevalue;
+// }
+// function pricemaney(){
+//   const ExtraMemoryCost = document.getElementById('memory-cost');
+//   const Extra Storageost
+// }
